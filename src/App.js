@@ -2,36 +2,30 @@ import logo from './logo.svg';
 import './App.css';
 import Film from './Film';
 import PageWrapper from './PageWrapper';
+import PeliculasJson from './peliculas.json';
+import Paginacion from './Paginacion'
 
 function App() {
-  let peliculas = [
-    {
-      title: "Oblivion (2012)",
-      calification: "8.1",
-      director: "Joss Whedon",
-      actors: "Robert Downey Jr., Chris Evans, Chris Hemsworth",
-      date: "1 may 2015",
-      duration: "2h 21mins",
-      img: "images/uploads/mv1.jpg"
-    },
-    {
-      title:"into the wild (2014)",
-      calification: "7.8", 
-      director:"Anthony Russo, Joe Russo", 
-      actors:"Chris Evans, Samuel L. Jackson, Scarlett Johansson",
-      date:"1 May 2015", 
-      duration:"2h 21mins", 
-      img:"images/uploads/mv2.jpg"
-    }
-  ];
+  let peliculas = PeliculasJson;
+
+
+
   return (
     <PageWrapper>
-      <Film title="Oblivion (2012)" calification="8.1" director="Joss Whedon" actors="Robert Downey Jr., Chris Evans, Chris Hemsworth" date="1 may 2015" duration="2h 21mins"
-        img="images/uploads/mv1.jpg">
-        Earth's mightiest heroes must come together and learn to fight as a team if they are to stop the mischievous Loki and his alien army from enslaving humanity...
-      </Film>
 
-      
+
+      {peliculas.map(pelicula =>
+        <Film title={pelicula.title} calification={pelicula.calification} director={pelicula.director} actors={pelicula.actors} date={pelicula.date} duration={pelicula.duration}
+          img={pelicula.img}>
+          {pelicula.description}
+        </Film>
+      )
+      };
+
+      <Paginacion pagina={2} total={4} onChange={(pagina) => {
+        alert(pagina)
+      }} />
+
     </PageWrapper>
 
   );
